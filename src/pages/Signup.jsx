@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { auth } from '../firebase.js'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { Link, useNavigate } from 'react-router-dom';
+import { RiLockPasswordFill } from "react-icons/ri";
+import { MdAlternateEmail } from "react-icons/md";
+import '../App.css';
 
 function Signup() {
   const [email, setEmail] = useState('');
@@ -9,7 +12,7 @@ function Signup() {
 
   const navigate = useNavigate();
 
-  const handeSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const userCredidential = await createUserWithEmailAndPassword(auth, email, password);
@@ -24,9 +27,10 @@ function Signup() {
   }
 
   return (
-    <div>
-      <h1>Signup Page</h1>
-      <form onSubmit={handeSubmit} className='signup-form'>
+    <div className="wrapper">
+      <form onSubmit={handleSubmit}>
+        <h1>SignUp</h1>
+        <div className="input-box">
         <input
           type="email"
           placeholder="Your email"
@@ -34,6 +38,9 @@ function Signup() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+        <MdAlternateEmail className='icon'/>
+        </div>
+        <div className="input-box">
         <input
           type="password"
           placeholder="Your password"
@@ -41,8 +48,16 @@ function Signup() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit" className='signup-button'>Signup</button>
-        <p>Need to Login? <Link to="/login">Login</Link></p>
+        <RiLockPasswordFill className='icon'/>
+        </div>
+        <div className="remember-forgot">
+          <label><input type="checkbox" />Remember me</label>
+          <Link to="/signup">Forgot password?</Link>
+        </div>
+        <button type="submit" className='login-button'>Sign Up</button>
+        <div className="register-link">
+        <p>Want to login? <Link to="/login">Login</Link></p>
+        </div>
       </form>
     </div>
   )

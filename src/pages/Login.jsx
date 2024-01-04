@@ -19,7 +19,7 @@ function Login() {
       const userCredidential = await signInWithEmailAndPassword(auth, email, password);
       console.log(userCredidential);
       const user = userCredidential.user;
-      localStorage.setItem('token', user.accesToken);
+      localStorage.setItem('token', user.accessToken);
       localStorage.setItem('user', JSON.stringify(user));
       navigate("/")
     } catch (error) {
